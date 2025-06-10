@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Recipe - Find Your Perfect Recipe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mood-purple': '#8B5CF6',
+                        'mood-pink': '#EC4899',
+                        'mood-blue': '#3B82F6',
+                        'mood-green': '#10B981',
+                        'mood-orange': '#F59E0B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 min-h-screen">
+    <!-- Header -->
+    <header class="text-center py-8">
+        <h1 class="text-5xl font-bold text-gray-800 mb-2">
+            <i class="fas fa-utensils text-mood-purple mr-3"></i>
+            Mood Recipe
+        </h1>
+        <p class="text-xl text-gray-600">Discover the perfect recipe for your current mood</p>
+    </header>
+
+    <!-- Main Container -->
+    <div class="max-w-6xl mx-auto px-4 pb-8">
+        <!-- Mood Selection Section -->
+        <div id="mood-selection" class="mb-8">
+            <h2 class="text-3xl font-semibold text-center text-gray-800 mb-8">How are you feeling today?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-4xl mx-auto">
+                <!-- Happy -->
+                <button onclick="selectMood('happy')" class="mood-btn bg-gradient-to-br from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-4xl mb-2">😊</div>
+                    <div class="font-semibold text-lg">Happy</div>
+                    <div class="text-sm opacity-90">Bright & Cheerful</div>
+                </button>
+
+                <!-- Comfort -->
+                <button onclick="selectMood('comfort')" class="mood-btn bg-gradient-to-br from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-4xl mb-2">🤗</div>
+                    <div class="font-semibold text-lg">Comfort</div>
+                    <div class="text-sm opacity-90">Cozy & Warm</div>
+                </button>
+
+                <!-- Energized -->
+                <button onclick="selectMood('energized')" class="mood-btn bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-4xl mb-2">⚡</div>
+                    <div class="font-semibold text-lg">Energized</div>
+                    <div class="text-sm opacity-90">Power & Fuel</div>
+                </button>
+
+                <!-- Stressed -->
+                <button onclick="selectMood('stressed')" class="mood-btn bg-gradient-to-br from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-4xl mb-2">😰</div>
+                    <div class="font-semibold text-lg">Stressed</div>
+                    <div class="text-sm opacity-90">Calm & Soothe</div>
+                </button>
+
+                <!-- Adventurous -->
+                <button onclick="selectMood('adventurous')" class="mood-btn bg-gradient-to-br from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-4xl mb-2">🌟</div>
+                    <div class="font-semibold text-lg">Adventurous</div>
+                    <div class="text-sm opacity-90">Bold & Exotic</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading" class="hidden text-center py-8">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-mood-purple"></div>
+            <p class="mt-4 text-gray-600">Finding the perfect recipe for you...</p>
+        </div>
+
+        <!-- Recipe Display Section -->
+        <div id="recipe-section" class="hidden">
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-4xl mx-auto">
+                <!-- Recipe Header -->
+                <div id="recipe-header" class="bg-gradient-to-r from-mood-purple to-mood-pink p-6 text-white">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2" id="recipe-name"></h3>
+                            <p class="text-lg opacity-90" id="recipe-description"></p>
+                        </div>
+                        <div class="text-right">
+                            <div class="bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                <div class="text-sm opacity-90">For your</div>
+                                <div class="font-semibold capitalize" id="current-mood"></div>
+                                <div class="text-sm opacity-90">mood</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recipe Content -->
+                <div class="p-6">
+                    <!-- Recipe Info -->
+                    <div class="grid grid-cols-3 gap-4 mb-6">
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <i class="fas fa-clock text-mood-blue text-xl mb-2"></i>
+                            <div class="font-semibold text-gray-800">Prep Time</div>
+                            <div class="text-gray-600" id="prep-time"></div>
+                        </div>
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <i class="fas fa-fire text-mood-orange text-xl mb-2"></i>
+                            <div class="font-semibold text-gray-800">Cook Time</div>
+                            <div class="text-gray-600" id="cook-time"></div>
+                        </div>
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <i class="fas fa-users text-mood-green text-xl mb-2"></i>
+                            <div class="font-semibold text-gray-800">Servings</div>
+                            <div class="text-gray-600" id="servings"></div>
+                        </div>
+                    </div>
+
+                    <!-- Ingredients and Instructions -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Ingredients -->
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                                <i class="fas fa-list-ul text-mood-green mr-2"></i>
+                                Ingredients
+                            </h4>
+                            <ul id="ingredients-list" class="space-y-2 text-gray-700">
+                                <!-- Ingredients will be populated here -->
+                            </ul>
+                        </div>
+
+                        <!-- Instructions -->
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                                <i class="fas fa-clipboard-list text-mood-blue mr-2"></i>
+                                Instructions
+                            </h4>
+                            <ol id="instructions-list" class="space-y-3 text-gray-700">
+                                <!-- Instructions will be populated here -->
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 mt-8 pt-6 border-t border-gray-200">
+                        <button onclick="getNewRecipe()" class="flex-1 bg-gradient-to-r from-mood-purple to-mood-pink text-white py-3 px-6 rounded-lg font-semibold hover:from-mood-purple/90 hover:to-mood-pink/90 transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-sync-alt mr-2"></i>
+                            Try Another Recipe
+                        </button>
+                        <button onclick="chooseDifferentMood()" class="flex-1 bg-white border-2 border-mood-purple text-mood-purple py-3 px-6 rounded-lg font-semibold hover:bg-mood-purple hover:text-white transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Choose Different Mood
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error-message" class="hidden max-w-md mx-auto bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg text-center">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            <span id="error-text"></span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-gray-600">
+        <p>&copy; 2024 Mood Recipe. Cook with your heart! ❤️</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
