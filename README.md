@@ -64,6 +64,21 @@ A simple and beautiful web application that recommends recipes based on your cur
 - **😰 Stressed**: Calming, relaxing recipes (Chamomile Tea Cookies, Lavender Honey Oatmeal)
 - **🌟 Adventurous**: Bold, exotic, and fusion recipes (Korean Beef Bulgogi Tacos, Moroccan Chicken Tagine)
 
+## 🎨 Demo
+
+### Screenshots
+The app features a beautiful, modern interface with:
+- **Mood Selection**: Interactive mood buttons with emojis and gradients
+- **Recipe Display**: Clean, organized recipe cards with all details
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+
+### Live Demo
+Once running locally, you can:
+- Test all 5 different moods
+- Experience smooth animations and transitions
+- Try the "Request New Recipe" functionality
+- See the beautiful gradient themes for each mood
+
 ## 📁 Project Structure
 
 ```
@@ -109,13 +124,36 @@ You can add new recipes by modifying the `recipes` array in `server.js`. Each re
 - **Port Already in Use**: Change the PORT in `server.js` or kill the process using port 3000
 - **Missing Dependencies**: Run `npm install` to ensure all dependencies are installed
 
+## 🤝 Contributing
+
+We welcome contributions! Here's how you can help:
+
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/your-feature-name`
+3. **Make your changes**: Add new features, fix bugs, or improve documentation
+4. **Test your changes**: Make sure everything works properly
+5. **Commit your changes**: `git commit -m "Add your descriptive commit message"`
+6. **Push to your branch**: `git push origin feature/your-feature-name`
+7. **Create a Pull Request**: Submit your changes for review
+
+### Contribution Ideas
+- Add more recipes for existing moods
+- Create new mood categories
+- Improve the UI/UX design
+- Add user favorites functionality
+- Implement recipe ratings
+- Add dietary restriction filters
+
 ## 📝 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 🤝 Contributing
+## 🙏 Acknowledgments
 
-Feel free to fork this project and submit pull requests for any improvements!
+- **Tailwind CSS** for the beautiful styling framework
+- **Font Awesome** for the amazing icons
+- **Express.js** for the robust backend framework
+- **SQLite** for the lightweight database solution
 
 ---
 
